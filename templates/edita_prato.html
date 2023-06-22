@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+{% include 'partials/menu.html' %}
+<!-- ##### Contact Form Area Start ##### -->
+<div class="contact-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <h3>Edite aqui seu prato, {{ user.username }} :)</h3>
+                </div>
+            </div>
+        </div>
+        {% include 'partials/alertas.html'%}
+        <div class="row">
+            <div class="col-12">
+                <p>Todos os campos são obrigatórios</p>
+                <div class="contact-form-area">
+                    <form action="{% url 'atualiza_prato'%}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="text" id="prato_id" class="form-control" name="prato_id" value="{{prato.id}}"
+                            hidden>
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <label for="nome_prato"><b>Título do prato</b></label>
+                                <input type="text" id="nome_prato" class="form-control" name="nome_prato"
+                                    placeholder="Ex. Maminha no limão" value="{{prato.nome_prato}}" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="file"><b>Ingredientes</b></label>
+                                <textarea class="form-control" name="ingredientes" cols="30" rows="10" placeholder="Ex. Maminha, &#10; 3 Limões, &#10;Sal e temperos" required>{{prato.ingredientes}}</textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="file"><b>Modo de preparo</b></label>
+                                <textarea class="form-control" name="modo_preparo" cols="30" rows="10" placeholder="Ex. Ex. Corte saboroso, temperado com limão, sal e diversos temperos, marinando para obter o máximo de suculência." required>{{prato.modo_preparo}}</textarea>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <label for="file"><b>Tempo de preparo (minutos)</b></label>
+                                <input type="number" class="form-control" name="tempo_preparo" placeholder="Ex. 2"
+                                    value="{{prato.tempo_preparo}}" required>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <label for="file"><b>Rendimento</b></label>
+                                <input type="text" class="form- control" name="rendimento"
+                                    placeholder="Ex. serve 1 pessoa" value="{{prato.rendimento}}" required>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <label for="file"><b>Categoria do prato</b></label>
+                                <input type="text" class="form-control" name="categoria" placeholder="Ex. Churrasco"
+                                    value="{{prato.categoria}}" required>
+                            </div>
+
+                            <div class="col-12 col-lg-4">
+                                <label for="file"><b>Foto utilizada</b></label>
+
+                                <img src="{{ prato.foto_prato }}" alt="">
+
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <label for="file"><b>Adicionar novafoto</b></label>
+
+                                <input type="file" class="form-control" name="foto_prato">
+
+                            </div>
+                            <div class="col-12 text-center">
+                                <button class="btn btn-success" type="submit">Atualizar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'partials/footer.html' %}
+{% endblock %}

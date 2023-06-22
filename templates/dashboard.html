@@ -1,0 +1,60 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+    <!-- ##### Menu #### Header ##### -->
+    {% include 'partials/menu.html' %}
+    <!-- ##### Header Area End ##### -->
+    <div class="contact-area section-padding-0-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading">
+                        <h3>Olá, {{ user.username }} !</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    
+     <!-- ##### Best Receipe Area Start ##### -->
+     <section class="best-receipe-area">
+        <div class="container">
+            <div class="row">
+                {% if lista_pratos %} 
+                {% for prato in lista_pratos %}
+                    <!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="single-best-receipe-area mb-30">
+                        {% if prato.foto_prato == '' %}
+                            <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
+                        {% else %} 
+                            <img src="{{ prato.foto_prato.url }}" alt=""> 
+                        {% endif %}
+                        <div class="receipe-content">
+                            <a href="{% url 'churrasco' prato.id %}">
+                                <h5>{{ prato.nome_prato }}</h5>
+                                <h6>{{ prato.categoria }}</h5> 
+                            </a>
+                            <a href="{% url 'edita_prato' prato.id %}" type="button" class="btn btn-info"> Editar </a>
+                            <a href="{% url 'deleta_prato' prato.id %}" type="button" class="btn btn-danger">Apagar</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                    <h6>Nenhum prato foi encontrado...</h6>
+                {% endif %}
+
+
+            </div>
+        </div>
+    </section>
+    <!-- ##### Paginador ##### -->
+    {% include 'partials/paginator.html' %}
+
+    <!-- ##### Footer Area Start ##### -->
+    {% include 'partials/footer.html' %}
+    <!-- ##### Footer Area Start ##### -->
+
+{% endblock %}

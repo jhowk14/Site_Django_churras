@@ -1,0 +1,64 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+    {% include 'partials/menu.html' %}
+        <!-- Receipe Slider -->
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="receipe-slider owl-carousel">
+                        {% if prato.foto_prato == '' %} 
+                            <img src="{% static 'img/bg-img/tomate_banner.jpg' %}"> 
+                        {% else %} 
+                            <img src="{{ prato.foto_prato.url }}" alt=""> 
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Receipe Content Area -->
+        <div class="receipe-content-area">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <div class="receipe-headline my-5">
+                            <span>{{prato.date_prato}}</span>
+                            <h2>{{prato.nome_prato}}</h2>
+                            <div class="receipe-duration">
+                                <h6>Preparo: {{prato.tempo_preparo}} minutos</h6>
+                                <h6>Rendimento: {{prato.rendimento}}</h6>
+                                <h6>Categoria: {{prato.categoria}}</h6>
+                                <h6>Por: {{prato.pessoa}}</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <!-- Single Preparation Step -->
+                        <div class="single-preparation-step d-flex">
+                            <p>{{prato.modo_preparo}}</p>
+                        </div>
+                    </div>
+
+                    <!-- Ingredientes -->
+                    <div class="col-12 col-lg-4">
+                        <div class="ingredients">
+                            <h4>Resumo</h4>
+                            <div class="ingredients">
+                                <p>{{prato.ingredientes}}</p>
+                            </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ingredientes -->
+        
+        <!-- ##### Footer Area Start ##### -->
+        {% include 'partials/footer.html' %}
+    <!-- ##### Footer Area Start ##### -->
+
+
+{% endblock %}
